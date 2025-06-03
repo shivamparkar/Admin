@@ -14,7 +14,6 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Payroll from "./pages/payroll/Payroll";
 import Profile from "./pages/profile/Profile";
 
-
 const queryClient = new QueryClient();
 
 function App() {
@@ -37,54 +36,59 @@ function App() {
     );
   };
 
-  const router = createBrowserRouter([
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: <Layout />,
+        children: [
+          {
+            path: "/",
+            element: <Home />,
+          },
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+          {
+            path: "/users",
+            element: <Users />,
+          },
+          {
+            path: "/employees",
+            element: <Products />,
+          },
+          {
+            path: "/users/:id",
+            element: <User />,
+          },
+          {
+            path: "/employees/:id",
+            element: <Product />,
+          },
+          {
+            path: "/payroll",
+            element: <Payroll columns={[]} rows={[]} slug={""} />,
+          },
+          // {
+          //   path: "/leaves",
+          //   element:<LeaveManagement/>
+          // },
+          // {
+          //   path: "/attendance",
+          //   element: <AttendancePage />,
+          // },
+        ],
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+    ],
     {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/profile",
-          element: <Profile/>
-        },
-        {
-          path: "/users",
-          element: <Users />,
-        },
-        {
-          path: "/employees",
-          element: <Products />,
-        },
-        {
-          path: "/users/:id",
-          element: <User />,
-        },
-        {
-          path: "/employees/:id",
-          element: <Product />,
-        },
-        {
-          path: "/payroll",
-          element:<Payroll columns={[]} rows={[]} slug={""} />
-        },
-        // {
-        //   path: "/leaves",
-        //   element:<LeaveManagement/>
-        // },
-        // {
-        //   path: "/attendance",
-        //   element: <AttendancePage />,
-        // },
-      ],
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-  ]);
+      basename: "/Admin", 
+    }
+  );
 
   return (
     <ThemeProvider>
