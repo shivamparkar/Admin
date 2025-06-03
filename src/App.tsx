@@ -68,7 +68,7 @@ function App() {
           },
           {
             path: "/payroll",
-            element: <Payroll columns={[]} rows={[]} slug={""} />,
+            element: <Payroll  />,
           },
           // {
           //   path: "/leaves",

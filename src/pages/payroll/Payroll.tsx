@@ -3,7 +3,7 @@ import {
   GridColDef,
   GridToolbar,
 } from "@mui/x-data-grid";
-import "./dataTable.scss";
+import "./payroll.scss";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
