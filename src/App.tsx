@@ -13,8 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./context/ThemeContext";
 import Payroll from "./pages/payroll/Payroll";
 import Profile from "./pages/profile/Profile";
-import LeaveManagement from "./pages/LeaveManagment/LeaveManagement";
-import AttendancePage from "./pages/attendance/AttendancePage";
+
 
 const queryClient = new QueryClient();
 
@@ -69,12 +68,12 @@ function App() {
         },
         {
           path: "/payroll",
-          element:<Payroll />
+          element:<Payroll columns={[]} rows={[]} slug={""} />
         },
-        {
-          path: "/leaves",
-          element:<LeaveManagement/>
-        },
+        // {
+        //   path: "/leaves",
+        //   element:<LeaveManagement/>
+        // },
         // {
         //   path: "/attendance",
         //   element: <AttendancePage />,
