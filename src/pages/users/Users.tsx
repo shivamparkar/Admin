@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import DataTable from "../../components/dataTable/DataTable";
-import { userRows } from "../../data";
 import "./users.scss";
 import Add from "../../components/add/Add";
 import { GridColDef } from "@mui/x-data-grid";

@@ -27,7 +27,9 @@ const DataTable = (props: Props) => {
       });
     },
     onSuccess: ()=>{
-      queryClient.invalidateQueries([`all${props.slug}`]);
+   queryClient.invalidateQueries({ queryKey: [`all${props.slug}`] });
+
+
     }
   });
 

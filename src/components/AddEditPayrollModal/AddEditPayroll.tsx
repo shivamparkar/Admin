@@ -1,16 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import useFetch from "../../hooks/useFetch";
 import './addEditPayrollModal.scss';
 
-const AddEditPayrollModal = ({ open, onClose, payroll }) => {
-  const [formData, setFormData] = useState({
+interface Payroll {
+  payrollId?: number;
+  employeeId: string;
+  amount: number;
+  payDate: string;
+  status: "Pending" | "Paid";
+}
+
+interface AddEditPayrollModalProps {
+  open: boolean;
+  onClose: () => void;
+  payroll?: Payroll | null;
+  onSave?: (data: Payroll) => void;
+}
+
+
+const AddEditPayrollModal: React.FC<AddEditPayrollModalProps> = ({
+  open,
+  onClose,
+  payroll,
+}) => {
+  const [formData, setFormData] = useState<Payroll>({
     employeeId: "",
-    amount: "",
+    amount: 0,
     payDate: "",
     status: "Pending",
   });
 
-  const { postData, updateData, loading } = useFetch(`/api/payrolls${payroll ? `/${payroll.payrollId}` : ""}`);
+  const { loading } = useFetch(`/api/payrolls${payroll ? `/${payroll.payrollId}` : ""}`);
 
   useEffect(() => {
     if (payroll) {
@@ -24,13 +44,13 @@ const AddEditPayrollModal = ({ open, onClose, payroll }) => {
     }
   }, [payroll]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (payroll) {
-      updateData(formData); // Update existing payroll
-    } else {
-      postData(formData); // Create new payroll
-    }
+    // if (payroll) {
+    //   updateData(formData); // Update existing payroll
+    // } else {
+    //   postData(formData); // Create new payroll
+    // }
     onClose();
   };
 
@@ -52,7 +72,7 @@ const AddEditPayrollModal = ({ open, onClose, payroll }) => {
             <input
               type="number"
               value={formData.amount}
-              onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, amount: Number(e.target.value) })}
               required
             />
 
@@ -67,7 +87,7 @@ const AddEditPayrollModal = ({ open, onClose, payroll }) => {
             <label>Status</label>
             <select
               value={formData.status}
-              onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+              onChange={(e) =>   setFormData({ ...formData, status: e.target.value as "Pending" | "Paid" })}
             >
               <option value="Pending">Pending</option>
               <option value="Paid">Paid</option>
