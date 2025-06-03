@@ -13,7 +13,7 @@ export const Navbar = () => {
     document.body.classList.toggle("dark", darkMode);
   }, [darkMode]);
 
-  const ThemeSwitch = styled(Switch)(({ theme }) => ({
+  const ThemeSwitch = styled(Switch)(() => ({
     width: 50,
     height: 26,
     padding: 0,
