@@ -1,0 +1,317 @@
+// Client/src/pages/attendance/attendancePage.scss
+
+// Variables (derived from user's HTML example, e.g., #0d0f1c, #47569e, #e6e9f4, #ced2e9, #f8f9fc)
+$primary-text-color: #0d0f1c;
+$secondary-text-color: #47569e; // For subtitles, secondary details
+$border-color: #ced2e9;
+$header-border-color: #e6e9f4;
+$background-color: #f8f9fc; // Page background and table header/cell bg
+$button-bg-color: #e6e9f4;
+$button-text-color: $primary-text-color;
+
+// Font (ensure 'Inter', 'Noto Sans' are available via index.html or global styles, or use fallbacks)
+$font-family-base: 'Inter', 'Noto Sans', sans-serif;
+
+.attendance-page {
+  font-family: $font-family-base;
+  background-color: $background-color; // Or neutral-50 from other example if that was preferred for page bg
+  min-height: 100vh; // Ensure it takes full screen height
+  display: flex;
+  flex-direction: column;
+
+  // Page Header (mimicking "Acme Co" header structure)
+  .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    border-bottom: 1px solid $header-border-color;
+    padding: 0.75rem 2.5rem; // py-3 px-10
+
+    .app-header-title-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem; // gap-4
+      color: $primary-text-color;
+
+      .app-header-icon { // Placeholder for SVG
+        // Add styles if using an actual SVG or image
+        font-size: 1.5rem; // Example
+      }
+      .app-header-title {
+        font-size: 1.125rem; // text-lg
+        font-weight: 700;    // font-bold
+        letter-spacing: -0.015em;
+      }
+    }
+    // No nav or profile section as per user feedback
+  }
+
+  // Main Content Area
+  .content-area {
+    padding: 1.25rem 2.5rem; // py-5 px-10 (reduced horizontal for content block)
+    
+    max-width: 960px;
+    margin: 0 auto; // Center the content block
+    flex-grow: 1; // Ensure it takes available space
+
+    .content-header-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap; // Allow button to wrap on smaller screens
+        gap: 0.75rem; // gap-3
+        padding: 1rem; // p-4
+    }
+
+    .content-title-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem; // gap-3
+      min-width: 18rem; // min-w-72
+
+      .content-main-title {
+        color: $primary-text-color;
+        font-size: 2rem; // text-[32px]
+        font-weight: 700;
+        letter-spacing: -0.015em; // tracking-light (Tailwind's tracking-tight is -0.025em, light is often positive or slightly negative)
+      }
+      .content-subtitle {
+        color: $secondary-text-color;
+        font-size: 0.875rem; // text-sm
+        font-weight: 400;
+      }
+    }
+
+    .create-attendance-button {
+      background-color: $button-bg-color;
+      color: $button-text-color;
+      padding: 0.5rem 1rem; // h-8 px-4
+      border-radius: 9999px; // rounded-full from other HTML example
+      border: none;
+      cursor: pointer;
+      font-size: 0.875rem; // text-sm
+      font-weight: 500; // font-medium
+      min-width: 84px;
+      &:hover {
+        opacity: 0.9;
+      }
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // Employee Search Area
+  .employee-search-area {
+    padding: 0.75rem 1rem; // px-4 py-3 from example
+    margin-bottom: 1rem;
+
+    .employee-search-input {
+      // Mimicking search bar from HTML
+      display: flex;
+      width: 100%;
+      padding: 0.75rem 1rem; // h-12, but also px-4 for input itself
+      border: 1px solid $border-color; // Input border
+      border-radius: 0.75rem; // rounded-xl
+      background-color: $button-bg-color; // bg-[#ededed] from other example
+      color: $primary-text-color;
+      font-size: 1rem; // text-base
+
+      &::placeholder {
+        color: $secondary-text-color; // placeholder:text-neutral-500
+      }
+      &:focus {
+        outline: none;
+        border-color: darken($border-color, 10%);
+        // box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); // Example focus like Bootstrap
+      }
+    }
+    .search-loading-message, .search-error-message {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        color: $secondary-text-color;
+    }
+    .search-error-message {
+        color: red;
+    }
+
+    .employee-search-results {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+      border: 1px solid $border-color;
+      border-radius: 0.5rem;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: white;
+      color:black;
+
+      .employee-search-result-item { // Added class for specificity
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        &:hover {
+          background-color: $button-bg-color;
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid $header-border-color; // Lighter border for items
+        }
+      }
+    }
+  }
+
+  // Attendance Table Area
+  .attendance-table-container {
+    padding: 0.75rem 1rem; // px-4 py-3 from example for content blocks
+
+    h3 { // For "Attendance for: Employee Name"
+        color: $primary-text-color;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .table-message {
+        padding: 1rem;
+        text-align: center;
+        color: $secondary-text-color;
+        &.error {
+            color: red;
+        }
+    }
+
+    .attendance-table {
+      width: 100%;
+      border-collapse: collapse; // More standard for tables
+      overflow: hidden; // For rounded corners on table
+      border-radius: 0.5rem; // rounded-lg
+      border: 1px solid $border-color;
+      background-color: $background-color; // Table bg
+
+      th, td {
+        padding: 0.75rem 1rem; // px-4 py-3
+        text-align: left;
+        font-size: 0.875rem; // text-sm
+      }
+
+      thead tr {
+        background-color: $background-color; // Ensure header row bg matches table bg or is distinct
+      }
+
+      th {
+        color: $primary-text-color;
+        font-weight: 500; // font-medium
+      }
+
+      tbody tr {
+        border-top: 1px solid $border-color;
+        td {
+          color: $primary-text-color; // Default text color for cells
+          // For secondary text like date/time, it was $secondary-text-color in example
+          // This can be applied to specific columns if needed by adding classes to <td>
+          height: auto; // Instead of fixed h-[72px], let content define height with padding
+          padding: 0.75rem 1rem; // py-2 px-4 (example used py-2 for td)
+        }
+      }
+
+      .actions-cell { // If we wrap actions in a div or give td a class
+        // For text links like "Edit | Delete"
+        .action-button {
+            background: none;
+            border: none;
+            color: $secondary-text-color; // text-[#47569e] from example
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            margin-right: 0.5rem;
+            &:hover {
+                text-decoration: underline;
+            }
+            &.delete:hover {
+                color: red;
+            }
+             &:disabled { // Style for disabled action buttons if needed
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+      }
+    }
+  }
+  
+  // Modal Styling (basic, can be enhanced)
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 500px; // Max width for the modal
+
+      h3 {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        color: $primary-text-color;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: $primary-text-color;
+          font-weight: 500;
+        }
+        input[type="date"],
+        input[type="time"] {
+          width: 100%;
+          padding: 0.6rem 0.8rem;
+          border: 1px solid $border-color;
+          border-radius: 0.25rem;
+          box-sizing: border-box;
+          font-size: 0.875rem;
+        }
+      }
+
+      .modal-actions {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+
+        .button-primary, .button-secondary {
+          padding: 0.6rem 1.2rem;
+          border: none;
+          border-radius: 0.25rem;
+          font-weight: 500;
+          cursor: pointer;
+        }
+        .button-primary {
+          background-color: $secondary-text-color; // Or a primary action color
+          color: white;
+          &:hover { opacity: 0.9; }
+          &:disabled { background-color: lighten($secondary-text-color, 20%); cursor: not-allowed; }
+        }
+        .button-secondary {
+          background-color: $button-bg-color;
+          color: $button-text-color;
+          border: 1px solid $border-color;
+          &:hover { opacity: 0.9; }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.upper{
+  display: flex;
+  flex-wrap: wrap;
+  gap:69%;
+  
+
+}
+
+
+.profilecontent {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  gap: 30px;
+
+  .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: red;
+  }
+
+  .submit-section {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .imgcontainer {
+    padding: 1px 5px;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    border: 1px solid black;
+
+    img {
+      border-radius: 50px;
+      height: 90px;
+      width: 90px;
+    }
+  }
+
+  .pcont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    margin-bottom: -40px;
+    padding: 1px 10px;
+  }
+
+
+  .personalinfo {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    border: 1px solid black;
+    padding: 15px;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      width: 200px;
+    }
+
+    .password-input {
+      position: relative;
+      width: 100%;
+
+      input {
+        width: 100%;
+        padding-right: 2.5rem; // leave space for the icon
+        height: 2.5rem; // ensure consistent height
+        padding: 0.5rem;
+        box-sizing: border-box;
+      }
+
+      .toggle-eye {
+        position: absolute;
+        right: 10px;
+        top: 33%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        user-select: none;
+        font-size: 1.2rem;
+        color: #666;
+      }
+    }
+
+    .error {
+      color: red;
+      font-size: 0.85rem;
+    }
+
+    .submit-section {
+      margin-top: 1rem;
+    }
+
+
+  }
+
+}
