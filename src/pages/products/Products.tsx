@@ -1,12 +1,11 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Products.scss";
 import DataTable from "../../components/dataTable/DataTable";
 import Add from "../../components/add/Add";
 import { GridCellParams, GridColDef } from "@mui/x-data-grid";
 import moment from "moment";
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
-import {employee} from '../../data';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import useFetch from "../../hooks/useFetch";
 
 const columns: GridColDef[] = [
@@ -22,10 +21,8 @@ const columns: GridColDef[] = [
     valueFormatter: (params: GridCellParams) => {
       const hireDate = params?.row?.hireDate;
       return hireDate ? moment(hireDate).format("DD/MM/YYYY hh:mm A") : "Invalid Date";
-    }
-    
+    },
   },
-  
   { field: "status", headerName: "Status", width: 120 },
   { field: "departmentName", headerName: "Department", width: 180 },
   {
@@ -33,22 +30,16 @@ const columns: GridColDef[] = [
     headerName: "Base Salary",
     width: 100,
     valueGetter: (params: GridCellParams) => {
-     const basesalary = params?.row?.baseSalary;
-     console.log(basesalary);
-     
-     return basesalary;
+      return params?.row?.baseSalary;
     },
   },
 ];
 
 const Products = () => {
   const [open, setOpen] = useState(false);
-  const newData = employee
-  const { data, loading, error, getData } = useFetch(
-    "https://localhost:7118/api/Employee"
-  );
 
- 
+  const { data, loading, error, getData } = useFetch("https://localhost:7118/api/Employee");
+
   useEffect(() => {
     getData();
   }, [getData]);
@@ -59,18 +50,24 @@ const Products = () => {
         <h1>Employees</h1>
         <button onClick={() => setOpen(true)}>Add New Employee</button>
       </div>
-      {loading ? (
-         <div>
-         <Skeleton height={40} count={5} style={{ marginBottom: "10px" }} />
-       </div>
-      ) : (
+
+      {loading && (
+        <div>
+          <Skeleton height={40} count={5} style={{ marginBottom: "10px" }} />
+        </div>
+      )}
+
+      {error && <div style={{ color: "red" }}>Error loading employees: {error.message}</div>}
+
+      {!loading && !error && (
         <DataTable
           slug="employees"
           columns={columns}
-          rows={newData || []}
+          rows={data || []}
           getRowId={(row) => row.employeeId}
         />
       )}
+
       {open && <Add slug="employee" columns={columns} setOpen={setOpen} />}
     </div>
   );
