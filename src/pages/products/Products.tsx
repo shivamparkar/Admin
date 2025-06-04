@@ -59,8 +59,7 @@ const Products = () => {
         </div>
       )}
 
-      {error && console.error("Error loading employees:", error.message)}
-
+     
       {!loading && (
         <DataTable
           slug="employees"
