@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 
 export default defineConfig({
-  base: '/Admin/',
+  base: './',
   plugins: [react()],
 })
