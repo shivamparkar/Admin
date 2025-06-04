@@ -1,5 +1,6 @@
 {
   "name": "starter",
+  "homepage": "https://shivamparkar.github.io/Admin/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -25,7 +26,7 @@
     "react-router-dom": "^7.3.0",
     "react-toggle": "^4.1.3",
     "recharts": "^2.15.1",
-    "sass": "^1.85.1"
+    "sass": "^1.89.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
