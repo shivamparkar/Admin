@@ -36,7 +36,7 @@ const columns: GridColDef[] = [
 
 const Products = () => {
   const [open, setOpen] = useState(false);
-  const { data, loading, error, getData } = useFetch("https://localhost:7118/api/Employee");
+  const { data, loading, getData } = useFetch("https://localhost:7118/api/Employee");
 
   useEffect(() => {
     getData();
