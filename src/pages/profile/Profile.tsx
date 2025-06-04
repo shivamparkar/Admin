@@ -57,7 +57,7 @@ const Profile = () => {
     alert("password Updated");
   };
 
-  const name = "Shivam";
+  const name = "Admin";
 
   return (
     <>

@@ -446,6 +446,7 @@ export const menu = [
 
 export const pay: PayrollType[]  = [
   {
+    id:1,
     payrollId: 1,
     employeeName: "Alice Johnson",
     amount: 5200.75,
@@ -453,6 +454,7 @@ export const pay: PayrollType[]  = [
     status: "Paid"
   },
   {
+     id:2,
     payrollId: 2,
     employeeName: "Bob Smith",
     amount: 4300.50,
@@ -460,6 +462,7 @@ export const pay: PayrollType[]  = [
     status: "Pending"
   },
   {
+     id:3,
     payrollId: 3,
     employeeName: "Cynthia Lee",
     amount: 6100.00,
@@ -467,6 +470,7 @@ export const pay: PayrollType[]  = [
     status: "Paid"
   },
   {
+     id:4,
     payrollId: 4,
     employeeName: "David Kim",
     amount: 4700.00,
@@ -474,6 +478,7 @@ export const pay: PayrollType[]  = [
     status: "Paid"
   },
   {
+     id:5,
     payrollId: 5,
     employeeName: "Eva Martinez",
     amount: 5400.20,
@@ -481,6 +486,7 @@ export const pay: PayrollType[]  = [
     status: "Pending"
   },
   {
+     id:6,
     payrollId: 6,
     employeeName: "Frank Thomas",
     amount: 4900.00,
@@ -488,6 +494,7 @@ export const pay: PayrollType[]  = [
     status: "Paid"
   },
   {
+     id:7,
     payrollId: 7,
     employeeName: "Grace Liu",
     amount: 5700.90,
@@ -495,6 +502,7 @@ export const pay: PayrollType[]  = [
     status: "Pending"
   },
   {
+     id:8,
     payrollId: 8,
     employeeName: "Henry Owens",
     amount: 5100.00,

@@ -7,6 +7,7 @@ import moment from "moment";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useFetch from "../../hooks/useFetch";
+import { employee } from "../../data"; // Local fallback data
 
 const columns: GridColDef[] = [
   { field: "employeeId", headerName: "ID", width: 90 },
@@ -29,20 +30,21 @@ const columns: GridColDef[] = [
     field: "basesalary",
     headerName: "Base Salary",
     width: 100,
-    valueGetter: (params: GridCellParams) => {
-      return params?.row?.baseSalary;
-    },
+    valueGetter: (params: GridCellParams) => params?.row?.baseSalary,
   },
 ];
 
 const Products = () => {
   const [open, setOpen] = useState(false);
-
   const { data, loading, error, getData } = useFetch("https://localhost:7118/api/Employee");
 
   useEffect(() => {
     getData();
   }, [getData]);
+
+  const finalData = (Array.isArray(data) && data.length > 0) 
+    ? data 
+    : employee;
 
   return (
     <div className="products">
@@ -57,13 +59,13 @@ const Products = () => {
         </div>
       )}
 
-      {error && <div style={{ color: "red" }}>Error loading employees: {error.message}</div>}
+      {error && console.error("Error loading employees:", error.message)}
 
-      {!loading && !error && (
+      {!loading && (
         <DataTable
           slug="employees"
           columns={columns}
-          rows={data || []}
+          rows={finalData}
           getRowId={(row) => row.employeeId}
         />
       )}

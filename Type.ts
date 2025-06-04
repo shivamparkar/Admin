@@ -1,4 +1,5 @@
 export interface PayrollType {
+  id:number;
   payrollId: number;
   employeeName: string;
   amount: number;
